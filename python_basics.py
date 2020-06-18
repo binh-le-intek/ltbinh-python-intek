@@ -16,3 +16,11 @@ def are_all_conditions_true(conditions):
         if x == False:
             return False
     return True
+
+def is_a_condition_true(conditions):
+    if len(conditions) == 0:
+        return None
+    for x in conditions:
+        if x == True:
+            return True
+    return False
