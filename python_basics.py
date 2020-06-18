@@ -24,3 +24,10 @@ def is_a_condition_true(conditions):
         if x == True:
             return True
     return False
+
+def filter_integers_greater_than(l, n):
+    filterList = []
+    for x in l:
+        if x>n:
+            filterList.append(x)
+    return filterList
