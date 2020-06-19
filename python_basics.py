@@ -104,4 +104,8 @@ def char_to_int(c):
     elif len(c) > 1:
         raise ValueError("Not a single digit")
 
-    return ord(c) - 48
+    value = ord(c)
+    if (value < 48 or value > 57):
+        raise ValueError("Not a digit")    
+
+    return value - 48
