@@ -46,3 +46,13 @@ def calculate_euclidean_distance_between_2_points(p1, p2):
     euclidean_distance = math.sqrt((p1[0]-p2[0])**2 +(p1[1]-p2[1])**2)
     return euclidean_distance
 
+def calculate_euclidean_distance_between_points(points):
+    if len(points)<2:
+        raise ValueError('The list MUST contain at least 2 points')
+
+    sum_length = 0
+    for i in range(len(points) - 1):
+        j = i + 1
+        sum_length += calculate_euclidean_distance_between_2_points(points[i], points[j])
+
+    return sum_length
