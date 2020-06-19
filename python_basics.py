@@ -98,4 +98,10 @@ def factorial(n):
     
     return n*factorial(n-1)
 
-print(factorial(5))
+def char_to_int(c):
+    if type(c) != str:
+        raise TypeError("Not a string")
+    elif len(c) > 1:
+        raise ValueError("Not a single digit")
+
+    return ord(c) - 48
