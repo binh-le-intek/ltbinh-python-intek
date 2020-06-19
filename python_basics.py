@@ -106,6 +106,17 @@ def char_to_int(c):
 
     value = ord(c)
     if (value < 48 or value > 57):
-        raise ValueError("Not a digit")    
+        raise ValueError("Not a positive integer string expression")    
 
     return value - 48
+
+def string_to_int(s):
+    if type(s) != str:
+        raise TypeError("Not a string")
+
+    value = 0
+    for i in range(len(s)):
+        value += char_to_int(s[i])
+        value *= 10
+    value //= 10
+    return value
