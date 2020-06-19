@@ -42,6 +42,7 @@ def find_cheapest_hotels(hotel_daily_rates, maximum_daily_rate):
 
     return min_hotel
 
-
-
+def calculate_euclidean_distance_between_2_points(p1, p2):
+    euclidean_distance = math.sqrt((p1[0]-p2[0])**2 +(p1[1]-p2[1])**2)
+    return euclidean_distance
 
