@@ -86,3 +86,16 @@ def uppercase_lowercase_words(s):
         else:
             s[i] = s[i].lower()
     return " ".join(s)
+
+def factorial(n):
+    if type(n) != int:
+        raise TypeError("Not an integer")
+    elif n<0:
+        raise ValueError("Not a positive integer")
+
+    if n == 0 or n == 1:
+        return 1
+    
+    return n*factorial(n-1)
+
+print(factorial(5))
