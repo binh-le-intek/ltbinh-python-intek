@@ -56,3 +56,19 @@ def calculate_euclidean_distance_between_points(points):
         sum_length += calculate_euclidean_distance_between_2_points(points[i], points[j])
 
     return sum_length
+
+def capitalize_words(s):
+    if type(s) == type(None):
+        return None
+    if type(s) != str:
+        raise TypeError("Not a string")
+    
+    s = s.lower()
+    s = s.split() 
+    new_string = [] 
+
+    for i in range(len(s)):
+        word = s[i][0].upper() + s[i][1:]
+        new_string.append(word)
+
+    return " ".join(new_string)
