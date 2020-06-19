@@ -1,9 +1,9 @@
 import math
 
 def hello(name):
-    correctName = " ".join(name.split())
-    welcomeMessage = 'Hello ' + correctName + '!'
-    return welcomeMessage
+    correct_name = " ".join(name.split())
+    welcome_message = 'Hello ' + correct_name + '!'
+    return welcome_message
 
 def calculate_hypotenuse(a, b):
     c = math.sqrt(a**2 + b**2)
@@ -26,8 +26,8 @@ def is_a_condition_true(conditions):
     return False
 
 def filter_integers_greater_than(l, n):
-    filterList = []
+    filter_list = []
     for x in l:
         if x>n:
-            filterList.append(x)
-    return filterList
+            filter_list.append(x)
+    return filter_list
