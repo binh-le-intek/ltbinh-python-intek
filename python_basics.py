@@ -72,3 +72,17 @@ def capitalize_words(s):
         new_string.append(word)
 
     return " ".join(new_string)
+
+def uppercase_lowercase_words(s):
+    if type(s) == type(None):
+        return None
+    if type(s) != str:
+        raise TypeError("Not a string")
+
+    s = s.split()
+    for i in range(len(s)):
+        if i%2==0:
+            s[i] = s[i].upper()
+        else:
+            s[i] = s[i].lower()
+    return " ".join(s)
