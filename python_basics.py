@@ -1,4 +1,5 @@
 import math
+import re
 
 def hello(name):
     correct_name = " ".join(name.split())
@@ -119,3 +120,21 @@ def string_to_int(s):
         value *= 10
     value //= 10
     return value
+
+def is_palindrome(value):
+    if type(value) == type(None):
+        return None
+
+    value = str(value)
+    value = ("".join(re.split('\W', value))).lower()
+    
+    if len(value) % 2 == 0:
+        count = len(value)//2
+    else:
+        count = len(value)//2 - 1
+
+    for i in range(count):
+        if value[i] != value[-i-1]:
+            return False
+
+    return True
