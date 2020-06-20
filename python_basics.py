@@ -33,7 +33,6 @@ def filter_integers_greater_than(l, n):
     return filter_list
 
 def find_cheapest_hotels(hotel_daily_rates, maximum_daily_rate):
-    min_daily_rate = 0
     min_hotel = []
 
     for hotel in hotel_daily_rates:
