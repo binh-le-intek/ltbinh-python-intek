@@ -138,3 +138,37 @@ def is_palindrome(value):
             return False
 
     return True
+
+
+def roman_numeral_to_int(roman_numeral):
+    if type(roman_numeral) != str:
+        raise TypeError("Not a string")
+
+    roman_list = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000
+    }
+    value = 0
+    i = 0
+    while i < len(roman_numeral) - 1:
+        s1 = roman_list[roman_numeral[i]]
+        s2 = roman_list[roman_numeral[i+1]]
+        if s1 >= s2:
+            value += s1
+        else:
+            i += 1
+            value = value + s2 - s1
+        i += 1
+
+    if i == len(roman_numeral) - 1:
+        value += roman_list[roman_numeral[i]]
+
+    return value
+
+    
+
