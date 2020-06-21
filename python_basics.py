@@ -1,5 +1,6 @@
 import math
 import re
+import time
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
@@ -172,5 +173,18 @@ def roman_numeral_to_int(roman_numeral):
         value += roman_list[roman_numeral[i]]
 
     return value
+
+def play_melody(melody, sound_basedir):
+    pygame.mixer.init()
+    list_sound = []
+    for i in range(len(melody)):
+        cur_sound = sound_basedir + '/' + melody[i].lower() + '.ogg'
+        list_sound.append(cur_sound)
+
+        sound = pygame.mixer.Sound(cur_sound)
+        sound.play()
+        time.sleep(0.4)
+        pygame.time.delay(400)
+        
 
 
