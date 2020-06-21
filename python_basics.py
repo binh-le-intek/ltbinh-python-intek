@@ -1,5 +1,8 @@
 import math
 import re
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+import pygame
 
 def hello(name):
     correct_name = " ".join(name.split())
@@ -170,5 +173,4 @@ def roman_numeral_to_int(roman_numeral):
 
     return value
 
-    
 
