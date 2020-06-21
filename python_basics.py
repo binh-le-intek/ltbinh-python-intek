@@ -178,13 +178,31 @@ def play_melody(melody, sound_basedir):
     pygame.mixer.init()
     list_sound = []
     for i in range(len(melody)):
-        cur_sound = sound_basedir + '/' + melody[i].lower() + '.ogg'
+        cur_melody =  melody[i].lower()
+        if  cur_melody[1] == '#':
+            cur_melody = list(cur_melody)
+            cur_melody[1] = 'b'
+            if  cur_melody[0] == 'c':
+                cur_melody[0] = 'd'
+            elif  cur_melody[0] == 'd':
+                cur_melody[0] = 'e'
+            elif  cur_melody[0] == 'e':
+                cur_melody[0] = 'f'
+            elif  cur_melody[0] == 'f':
+                cur_melody[0] = 'g'
+            elif  cur_melody[0] == 'g':
+                cur_melody[0] = 'a'
+            elif  cur_melody[0] == 'a':
+                cur_melody[0] = 'b'
+            elif  cur_melody[0] == 'b':
+                cur_melody[0] = 'c'
+                cur_melody[2] = str(int(cur_melody[2])+1)
+            cur_melody = ''.join(cur_melody)
+        cur_sound = sound_basedir + '/' +   cur_melody + '.ogg'
         list_sound.append(cur_sound)
-
         sound = pygame.mixer.Sound(cur_sound)
         sound.play()
         time.sleep(0.4)
         pygame.time.delay(400)
-        
 
-
+        return list_sound
