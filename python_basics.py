@@ -203,6 +203,6 @@ def play_melody(melody, sound_basedir):
         sound = pygame.mixer.Sound(cur_sound)
         sound.play()
         time.sleep(0.4)
-        pygame.time.delay(400)
+        
 
-        return list_sound
+    return list_sound
