@@ -6,7 +6,11 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 
 def hello(name):
-    correct_name = " ".join(name.split())
+    if type(name) != str:
+        raise TypeError("Not a string")
+    correct_name = name.strip()
+    if len(correct_name) == 0 or len(correct_name) >= 20:
+        raise ValueError("Not a valid string")
     welcome_message = 'Hello ' + correct_name + '!'
     return welcome_message
 
@@ -15,8 +19,11 @@ def calculate_hypotenuse(a, b):
     return c
 
 def are_all_conditions_true(conditions):
+    if type(conditions) == type(None):
+        return conditions
     if len(conditions) == 0:
         return None
+    
     for x in conditions:
         if x == False:
             return False
@@ -41,10 +48,15 @@ def find_cheapest_hotels(hotel_daily_rates, maximum_daily_rate):
     min_hotel = []
 
     for hotel in hotel_daily_rates:
-        if hotel[1] < maximum_daily_rate:
-            min_hotel.append(hotel[0])
+        if hotel[1] <= maximum_daily_rate:
+            min_hotel.append(hotel)
 
-    return min_hotel
+    min_hotel = sorted(min_hotel, key=lambda item:item[1])
+    value = []
+    for i in range(len(min_hotel)):
+        value.append(min_hotel[i][0])
+
+    return value
 
 def calculate_euclidean_distance_between_2_points(p1, p2):
     euclidean_distance = math.sqrt((p1[0]-p2[0])**2 +(p1[1]-p2[1])**2)
@@ -127,10 +139,12 @@ def string_to_int(s):
 
 def is_palindrome(value):
     if type(value) == type(None):
-        return None
+        return False
 
     value = str(value)
     value = ("".join(re.split('\W', value))).lower()
+    if len(value) == 0:
+        return False
     
     if len(value) % 2 == 0:
         count = len(value)//2
@@ -145,10 +159,10 @@ def is_palindrome(value):
 
 
 def roman_numeral_to_int(roman_numeral):
-    if type(roman_numeral) != str:
+    if not(isinstance(roman_numeral, str)) or len(roman_numeral) == 0:
         raise TypeError("Not a string")
-
     roman_list = {
+            'N': 0,
             'I': 1,
             'V': 5,
             'X': 10,
@@ -157,16 +171,35 @@ def roman_numeral_to_int(roman_numeral):
             'D': 500,
             'M': 1000
     }
+    for i in range(len(roman_numeral)):
+        if roman_list.get(roman_numeral[i]) == None:
+            raise ValueError("Not a Roman numeral")
+    count = 1
+    for i in range(len(roman_numeral)-1):
+        if roman_numeral[i] == roman_numeral[i+1]:
+            count += 1
+        else:
+            count = 1
+        if count == 4:
+            raise ValueError("Not a Roman numeral")
+    
+    
     value = 0
     i = 0
     while i < len(roman_numeral) - 1:
         s1 = roman_list[roman_numeral[i]]
         s2 = roman_list[roman_numeral[i+1]]
         if s1 >= s2:
+            if (s1 + s2) == 10 or (s1+s2) == 100 or (s1+s2) == 1000:
+                raise ValueError("Not a Roman numeral")
             value += s1
         else:
-            i += 1
-            value = value + s2 - s1
+            minus = s2 - s1
+            if minus == 4 or minus == 9 or minus == 40 or minus == 90 or minus == 400 or minus == 900: 
+                i += 1
+                value = value + minus
+            else:
+                raise ValueError("Not a Roman numeral")
         i += 1
 
     if i == len(roman_numeral) - 1:
@@ -175,6 +208,29 @@ def roman_numeral_to_int(roman_numeral):
     return value
 
 def play_melody(melody, sound_basedir):
+    if not(isinstance(melody, list) or isinstance(melody, tuple)) or len(melody) <= 1:
+        raise TypeError("Not a string")
+    for i in range(len(melody)):
+        if not(isinstance(melody[i], str)):
+            raise TypeError("Not a string")
+
+    for i in range(len(melody)):
+        if len(melody[i]) <= 1 or len(melody[i]) > 3:
+            raise ValueError("Not a valid melody")
+        available_melody = ['A', 'B', 'C' , 'D', 'E', 'F', 'G']
+        if melody[i][0] not in available_melody:
+            raise ValueError("Not a valid melody")
+        if len(melody[i]) == 2:
+            if int(melody[i][1]) < 2 or int(melody[i][1]) > 5:
+                raise ValueError("Not a valid melody")
+        else:
+            if melody[i][1] != 'B' and melody[i][1] != '#':
+                raise ValueError("Not a valid melody")
+            if int(melody[i][2]) < 2 or int(melody[i][2]) > 5:
+                raise ValueError("Not a valid melody")
+            if (melody[i][0] == 'E' and melody[i][1] == '#') or (melody[i][0] == 'F' and melody[i][1] == 'B') or (melody[i][0] == 'B' and melody[i][1] == '#') or (melody[i][0] == 'C' and melody[i][1] == 'B'):
+                raise ValueError("Not a valid melody")
+
     pygame.mixer.init()
     list_sound = []
     for i in range(len(melody)):
@@ -203,6 +259,9 @@ def play_melody(melody, sound_basedir):
         sound = pygame.mixer.Sound(cur_sound)
         sound.play()
         time.sleep(0.4)
+        #pygame.time,delay(400)
         
 
     return list_sound
+
+print(roman_numeral_to_int('IXC'))
