@@ -19,23 +19,14 @@ def calculate_hypotenuse(a, b):
     return c
 
 def are_all_conditions_true(conditions):
-    if type(conditions) == type(None):
-        return conditions
-    if len(conditions) == 0:
+    if type(conditions) == type(None) or len(conditions) == 0:
         return None
-    
-    for x in conditions:
-        if x == False:
-            return False
-    return True
+    return all(conditions)
 
 def is_a_condition_true(conditions):
     if len(conditions) == 0:
         return None
-    for x in conditions:
-        if x == True:
-            return True
-    return False
+    return any(conditions)
 
 def filter_integers_greater_than(l, n):
     filter_list = []
@@ -259,7 +250,7 @@ def play_melody(melody, sound_basedir):
         sound = pygame.mixer.Sound(cur_sound)
         sound.play()
         time.sleep(0.4)
-        #pygame.time,delay(400)
+        pygame.time.delay(400)
         
 
     return list_sound
